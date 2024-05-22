@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Couple Cuddle Cards</title>
+
+        <meta name="description" content="Card spicy game for couples">
+
+        <link rel="stylesheet" href="style.css">
+
+        <script>
+
+            const qs = window.location.search.replace('?', '');
+            const items = qs.split('&');
+
+            const params = items.reduce((data, item) => {
+                const [rawKey, rawValue] = item.split('=');
+                const key = decodeURIComponent(rawKey);
+                const value = decodeURIComponent(rawValue);
+                data[key] = value;
+                return data;
+            }, {});
+
+            const config = {
+                startDeck: params['deck'] ? params['deck'] : null, // debug
+                useAllCards: location.href.indexOf('all') > 0, // debug
+                debug: location.href.indexOf('debug') > 0,
+                duration: 60,
+                set: 'base'
+            }
+
+            let set = null;
+            let version = 1;
+            let cardIndex = -1;
+            let cardElement = null;
+            let textElement = null;
+            let imageElement = null;
+            let buttonElement = null;
+            let endAudio = new Audio('assets/card-end.mp3?ver=' + version);
+            endAudio.load();
+            let timer = null;
+            let buttonStep = '';
+
+            let cards = [];
+
+            window.onload = async (event) => {
+                await fetch('assets/' + config.set + '/set.json')
+                        .then((response) => response.json())
+                        .then((json) => {
+                            set = json;
+                            console.log(set);
+                        });
+                cardElement = document.getElementById("card");
+                textElement = document.getElementById("card-text");
+                deckElement = document.getElementById("deck");
+                levelElement = document.getElementById("card-level");
+                durationElement = document.getElementById("card-duration");
+                imageElement = document.getElementById("card-image");
+                buttonElement = document.getElementById("card-button");
+                numberElement = document.getElementById("card-number");
+
+                console.log(set.colors['he']);
+
+                for (level = 0; level < set.decks.length; level++) {
+                    let deck = set.decks[level];
+                    if (config.startDeck && config.startDeck !== deck.id) {
+                        continue;
+                    }
+                    config.startDeck = null;
+
+
+
+                    deck.cards = shuffle(deck.cards);
+                    // Use the specified number of cards for a deck or helf of them
+                    max = deck.max ? deck.max : Math.floor(deck.cards.length * 0.5);
+                    sub = deck.cards.slice(0, max);
+                    sub.forEach(c => {
+                        c.deck_id = deck.id;
+                        console.log(c.color);
+                        if (!c.color.startsWith('#')) {
+                            c.color = set.colors[c.color];
+                        }
+                        console.log(c.color);
+                        c.duration = config.debug ? 1 : (c.duration ? c.duration : config.duration);
+                    });
+                    cards = cards.concat(sub);
+                }
+
+                console.log(cards);
+
+            };
+
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+
+                // While there remain elements to shuffle.
+                while (currentIndex != 0) {
+
+                    // Pick a remaining element.
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    // And swap it with the current element.
+                    [array[currentIndex], array[randomIndex]] = [
+                        array[randomIndex], array[currentIndex]];
+                }
+
+                return array;
+            }
+
+            function setCard(card) {
+                deckElement.style.backgroundColor = 'white';
+
+                //buttonElement.style.backgroundColor = levelColors[card.level - 1];
+
+                imageElement.style.visibility = 'visible';
+                textElement.style.visibility = 'visible';
+
+                textElement.innerHTML = card.text;
+
+                imageElement.src = card.image === '-' ? '' : 'assets/' + set.id + '/' + card.image;
+
+
+                numberElement.innerHTML = cardIndex + 1 + "/" + cards.length;
+            }
+
+            function startGame() {
+                document.getElementById('instructions').style.display = 'none';
+                deckElement.style.display = 'flex';
+                nextCard();
+            }
+
+            function buttonClick() {
+                if (buttonStep === 'skip') {
+                    nextCard();
+                    return;
+                }
+
+                if (buttonStep === 'play') {
+                    setCard(cards[cardIndex]);
+                    buttonElement.innerHTML = '⏱'; // '👩‍❤️‍👨⏱️';
+                    buttonElement.disabled = true;
+                    window.clearTimeout(timer);
+                    timer = window.setTimeout(endCard, cards[cardIndex].duration * 1000);
+                    return;
+                }
+
+                if (buttonStep === 'next') {
+                    nextCard();
+                    return;
+                }
+
+            }
+
+            function nextCard() {
+                cardIndex++;
+                if (cardIndex >= cards.length) {
+                    deckElement.style.display = 'none';
+                    document.getElementById('end').style.display = 'block';
+                    return;
+                }
+
+                imageElement.style.visibility = 'hidden';
+                textElement.style.visibility = 'hidden';
+
+                deckElement.style.backgroundColor = cards[cardIndex].color;
+                deckElement.style.borderTopColor = cards[cardIndex].color;
+                deckElement.style.borderBottomColor = cards[cardIndex].color;
+
+                buttonElement.disabled = false;
+                buttonElement.innerHTML = '⟳'; //'▶';
+                buttonStep = 'play';
+            }
+
+            function endCard() {
+                endAudio.play();
+                endAudio.onended = nextCard;
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="card" id="instructions">
+
+            <p><img id="instructions-image" src="assets/base/start.jpg"></p>
+            <h2>Up, Down and Cat</h2>
+
+            <div id="instructions-text">
+                <p>Start wearing knickers and bra and lying on bed.</p>
+
+                <p>
+                    Each card is a cuddle with a position, a performer, and a duration.
+                </p>
+
+            </div>
+
+            <button class="button" onclick="startGame();">▶</button>
+
+        </div>
+
+        <div class="card" style="display: none;" id="deck">
+
+            <div>
+
+                <img src="" id="card-image" style="max-width: 100%">
+
+                <h4 id="card-text"></h4>
+            </div>
+
+            <div>
+                <button class="btn btn-dark btn-lg" id="card-button" onclick="buttonClick()"></button>
+
+                <div id="card-number"></div>
+            </div>
+        </div>
+
+
+        <div class="card" id="end" style="display: none">
+
+            <p><img src="assets/end.jpg"></p>
+            <h2>No more rules, have fun!</h2>
+
+            <span style="font-size: 40px">💦🔥</span>
+
+        </div>
+
+    </body>
+</html>
