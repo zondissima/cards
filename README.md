@@ -28,6 +28,7 @@ A configuration object is inside the index.html and can be used to set the defau
 * A lot of professional design
 * Add the option to extract the cards changeing everytime the color (so every player do something in a round)
 * Move the default card duration at set level or deck level (or both)
+* Move instruction to set definition
  
 ## Notes
 The commited pictures are samples, you must change them with your own if you want to publish the game "as-is".
