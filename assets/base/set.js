@@ -1,5 +1,6 @@
-{
+set = {
     "id": "base",
+    "timer": 60,
     "colors": {
         "he": "#132F63",
         "she": "#E95B93",
