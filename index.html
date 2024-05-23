@@ -26,10 +26,15 @@
             const config = {
                 startDeck: params['deck'] ? params['deck'] : null, // debug
                 useAllCards: location.href.indexOf('all') > 0, // debug
-                debug: location.href.indexOf('debug') > 0,
-                duration: 60,
-                set: 'base'
+                debug: location.href.indexOf('debug') > 0, // debug
+                timer: 60,
+                set: params['set'] ? params['set'] : 'base'
             }
+
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.src = "assets/" + config.set + '/set.js';
+            document.head.append(s);
 
             let set = null;
             let version = 1;
@@ -37,6 +42,7 @@
             let cardElement = null;
             let textElement = null;
             let imageElement = null;
+            let deckElement = null;
             let buttonElement = null;
             let endAudio = new Audio('assets/card-end.mp3?ver=' + version);
             endAudio.load();
@@ -46,12 +52,11 @@
             let cards = [];
 
             window.onload = async (event) => {
-                await fetch('assets/' + config.set + '/set.json')
-                        .then((response) => response.json())
-                        .then((json) => {
-                            set = json;
-                            console.log(set);
-                        });
+                //await fetch('assets/' + config.set + '/set.json')
+                //        .then((response) => response.json())
+                //        .then((json) => {
+                //            set = json;
+                //        });
                 cardElement = document.getElementById("card");
                 textElement = document.getElementById("card-text");
                 deckElement = document.getElementById("deck");
@@ -61,7 +66,10 @@
                 buttonElement = document.getElementById("card-button");
                 numberElement = document.getElementById("card-number");
 
-                console.log(set.colors['he']);
+                document.getElementById("cover-image").src = 'assets/' + config.set + '/cover.jpg';
+                document.getElementById("end-image").src = 'assets/' + config.set + '/end.jpg';
+
+                if (!set.timer) set.timer = config.timer;
 
                 for (level = 0; level < set.decks.length; level++) {
                     let deck = set.decks[level];
@@ -70,20 +78,18 @@
                     }
                     config.startDeck = null;
 
-
-
                     deck.cards = shuffle(deck.cards);
                     // Use the specified number of cards for a deck or helf of them
                     max = deck.max ? deck.max : Math.floor(deck.cards.length * 0.5);
                     sub = deck.cards.slice(0, max);
                     sub.forEach(c => {
                         c.deck_id = deck.id;
-                        console.log(c.color);
-                        if (!c.color.startsWith('#')) {
+                        if (!c.color) {
+                            c.color = set.colors['default'];
+                        } else if (!c.color.startsWith('#')) {
                             c.color = set.colors[c.color];
                         }
-                        console.log(c.color);
-                        c.duration = config.debug ? 1 : (c.duration ? c.duration : config.duration);
+                        c.duration = config.debug ? 1 : (c.duration ? c.duration : set.timer);
                     });
                     cards = cards.concat(sub);
                 }
@@ -127,7 +133,7 @@
             }
 
             function startGame() {
-                document.getElementById('instructions').style.display = 'none';
+                document.getElementById('cover').style.display = 'none';
                 deckElement.style.display = 'flex';
                 nextCard();
             }
@@ -184,12 +190,12 @@
     </head>
     <body>
 
-        <div class="card" id="instructions">
+        <div class="card" id="cover">
 
-            <p><img id="instructions-image" src="assets/base/start.jpg"></p>
+            <p><img id="cover-image" src=""></p>
             <h2>Up, Down and Cat</h2>
 
-            <div id="instructions-text">
+            <div id="cover-text">
                 <p>Start wearing knickers and bra and lying on bed.</p>
 
                 <p>
@@ -221,10 +227,10 @@
 
         <div class="card" id="end" style="display: none">
 
-            <p><img src="assets/end.jpg"></p>
+            <p><img id="end-image" src=""></p>
             <h2>No more rules, have fun!</h2>
 
-            <span style="font-size: 40px">💦🔥</span>
+            <span style="font-size: 40px">🔥</span>
 
         </div>
 
