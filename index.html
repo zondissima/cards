@@ -33,7 +33,7 @@
 
             var s = document.createElement("script");
             s.type = "text/javascript";
-            s.src = "assets/" + config.set + '/set.js';
+            s.src = "assets/" + config.set + '/set.js?ver=' + Date.now();
             document.head.append(s);
 
             let set = null;
@@ -66,8 +66,15 @@
                 buttonElement = document.getElementById("card-button");
                 numberElement = document.getElementById("card-number");
 
-                document.getElementById("cover-image").src = 'assets/' + config.set + '/cover.jpg';
+                document.getElementById("start-image").src = 'assets/' + config.set + '/start.jpg';
                 document.getElementById("end-image").src = 'assets/' + config.set + '/end.jpg';
+                console.log(set);
+                if (set.name) {
+                    document.getElementById("start-name").innerHTML = set.name;
+                }
+                if (set.instructions) {
+                    document.getElementById("start-text").innerHTML = set.instructions;
+                }
 
                 if (!set.timer) set.timer = config.timer;
 
@@ -80,7 +87,10 @@
 
                     deck.cards = shuffle(deck.cards);
                     // Use the specified number of cards for a deck or helf of them
-                    max = deck.max ? deck.max : Math.floor(deck.cards.length * 0.5);
+                    max = 1;
+                    if (deck.cards.length > 1) {
+                        max = deck.max ? deck.max : Math.floor(deck.cards.length * 0.5);
+                    }
                     sub = deck.cards.slice(0, max);
                     sub.forEach(c => {
                         c.deck_id = deck.id;
@@ -93,8 +103,6 @@
                     });
                     cards = cards.concat(sub);
                 }
-
-                console.log(cards);
 
             };
 
@@ -126,14 +134,14 @@
 
                 textElement.innerHTML = card.text;
 
-                imageElement.src = card.image === '-' ? '' : 'assets/' + set.id + '/' + card.image;
+                imageElement.src = card.image === '-' ? '' : 'assets/' + config.set + '/' + card.image;
 
 
                 numberElement.innerHTML = cardIndex + 1 + "/" + cards.length;
             }
 
             function startGame() {
-                document.getElementById('cover').style.display = 'none';
+                document.getElementById('start').style.display = 'none';
                 deckElement.style.display = 'flex';
                 nextCard();
             }
@@ -190,19 +198,14 @@
     </head>
     <body>
 
-        <div class="card" id="cover">
+        <div class="card" id="start">
 
-            <p><img id="cover-image" src=""></p>
-            <h2>Up, Down and Cat</h2>
+            <p><img id="start-image" src=""></p>
+            <h2 id="start-name">Cuddles</h2>
 
-            <div id="cover-text">
-                <p>Start wearing knickers and bra and lying on bed.</p>
+            <p id="start-text">
 
-                <p>
-                    Each card is a cuddle with a position, a performer, and a duration.
-                </p>
-
-            </div>
+            </p>
 
             <button class="button" onclick="startGame();">▶</button>
 
