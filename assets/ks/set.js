@@ -6,12 +6,13 @@ set = {
         "she": "#E95B93",
         "all": "#4C5166"
     },
+    "name": "Cuddles",
+    "instructions": "Each card is a cuddle played by him or her, with an action and a timing. Start wearing only underware. The last deck is hot.",
     "timer": 60,
     "decks": [
         {
             "id": "deck1",
             "cards": [
-
 
                 {"image": "he-down.jpg", "color": "she", "text": "Massage feet and legs"},
                 {"image": "he-down.jpg", "color": "she", "text": "Massage the butt"},
@@ -24,7 +25,6 @@ set = {
                 {"image": "she-down.jpg", "color": "he", "text": "Massage back and butt"},
                 {"image": "she-down.jpg", "color": "he", "text": "Massage neck and back"},
                 {"image": "she-down.jpg", "color": "he", "text": "Kiss neck and back"},
-
 
                 {"image": "he-up.jpg", "color": "she", "text": "Massage feet and legs"},
                 {"image": "he-up.jpg", "color": "she", "text": "Rub the chest"},
@@ -65,7 +65,6 @@ set = {
                 {"image": "she-down.jpg", "color": "he", "text": "Kiss the butt"},
                 {"image": "she-down.jpg", "color": "he", "text": "Kisses on back and neck"},
 
-
                 {"image": "he-up.jpg", "color": "she", "text": "Massage the chest"},
                 {"image": "he-up.jpg", "color": "she", "text": "Caress the tights and there"},
 
@@ -79,7 +78,6 @@ set = {
                 {"image": "she-up.jpg", "color": "he", "text": "Passionate kisses on neck and mouth"},
                 {"image": "she-up.jpg", "color": "he", "text": "Delicate kisses on the chest"},
                 {"image": "she-up.jpg", "color": "he", "text": "Delicate kisses on the belly and there"},
-
 
                 {"image": "he-sit.jpg", "color": "she", "text": "Caresses and kisses on neck and chest"},
                 {"image": "she-sit.jpg", "color": "he", "text": "Caresses and kisses on neck and chest"}
@@ -96,7 +94,6 @@ set = {
                 {"image": "she-down.jpg", "color": "he", "text": "Rub the tights and butt"},
 
                 {"image": "she-down.jpg", "color": "he", "text": "Kiss and nibble the butt"},
-
 
                 {"image": "he-up.jpg", "color": "she", "text": "Rub the tights and there"},
 
@@ -115,7 +112,6 @@ set = {
                 {"image": "she-up.jpg", "color": "he", "text": "Kiss the breast and caress there"},
                 {"image": "she-up.jpg", "color": "he", "text": "French kiss and caress there"},
 
-
                 {"image": "he-cat.jpg", "color": "she", "text": "Massage the butt"},
 
                 {"image": "he-cat.jpg", "color": "she", "text": "Caress the butt and there"},
@@ -130,7 +126,6 @@ set = {
 
                 {"image": "she-cat.jpg", "color": "he", "text": "Kiss the breast"},
                 {"image": "she-cat.jpg", "color": "he", "text": "Kiss and nibble the butt and there"},
-
 
                 {"image": "he-sit.jpg", "color": "she", "text": "From behind kiss the neck and caress there"},
                 {"image": "she-sit.jpg", "color": "he", "text": "From behind kiss the neck and caress there"}
@@ -179,7 +174,6 @@ set = {
                 {"image": "she-up.jpg", "color": "he", "text": "Kiss the breast and rub there"},
                 {"image": "she-up.jpg", "color": "he", "text": "Passionate kiss and rub there"},
 
-
                 {"image": "he-cat.jpg", "color": "she", "text": "Caress the butt and there"},
 
                 {"image": "he-cat.jpg", "color": "she", "text": "Nibble and suck butt and there"},
@@ -189,7 +183,6 @@ set = {
                 {"image": "she-cat.jpg", "color": "he", "text": "Nibble and suck butt and there"},
 
                 {"image": "she-cat.jpg", "color": "he", "text": "Nibble the butt and caress the breast"},
-
 
                 {"image": "he-sit.jpg", "color": "she", "text": "From behind kiss the neck and caress there"},
                 {"image": "he-sit.jpg", "color": "she", "text": "Wrapping with legs kiss the neck and mouth"},
