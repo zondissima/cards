@@ -6,6 +6,8 @@ set = {
         "she": "#E95B93",
         "all": "#4C5166"
     },
+    "name": "Cuddles",
+    "instructions": "Each card is a cuddle played by him or her, with an action and a timing. Start wearing only underware.",
     "decks": [
         {
             "id": "deck1",
