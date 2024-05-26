@@ -3,6 +3,7 @@ set = {
     "colors": {
         "default": "darkred",
     },
+    "name": "Cuddles for her",
     "instructions": "Each card is a cuddle by him for at least the card timing. The card is changed when she says NEXT. She blindfolded is recommended.",
     "timer": 45,
     "decks": [
