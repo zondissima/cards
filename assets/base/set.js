@@ -11,6 +11,8 @@ set = {
     "decks": [
         {
             "id": "deck1",
+            "name": "Soft touch",
+            "max": 0.5,
             "cards": [
 
 
@@ -42,6 +44,7 @@ set = {
         },
         {
             "id": "bra",
+            "name": "Remove the bra",
             "max": 1,
             "color": "#fbec5d",
             "cards": [
@@ -51,6 +54,7 @@ set = {
         },
         {
             "id": "deck2",
+            "max": 0.5,
             "cards": [
                 {"image": "he-down.jpg", "color": "she", "text": "Massage the butt"},
                 {"image": "he-down.jpg", "color": "she", "text": "Massage the back and butt"},
@@ -81,13 +85,13 @@ set = {
                 {"image": "she-up.jpg", "color": "he", "text": "Delicate kisses on the chest"},
                 {"image": "she-up.jpg", "color": "he", "text": "Delicate kisses on the belly and there"},
 
-
                 {"image": "he-sit.jpg", "color": "she", "text": "Caresses and kisses on neck and chest"},
                 {"image": "she-sit.jpg", "color": "he", "text": "Caresses and kisses on neck and chest"}
             ]
         },
         {
             "id": "deck3",
+            "max": 0.5,
             "cards": [
 
                 {"image": "he-down.jpg", "color": "she", "text": "Rub the tights and butt"},
@@ -139,6 +143,7 @@ set = {
         },
         {
             "id": "underware",
+            "name": "Remove his underware",
             "max": 1,
             "cards": [
                 {"image": "he-down.jpg", "color": "she", "text": "Kiss the butt and free up the 🍆"},
@@ -148,6 +153,7 @@ set = {
         },
         {
             "id": "underware",
+            "name": "Remove her underware",
             "max": 1,
             "cards": [
                 {"image": "she-down.jpg", "color": "he", "text": "Kiss the butt and free up the 🌷"},
@@ -157,6 +163,7 @@ set = {
         },
         {
             "id": "deck4",
+            "max": 0.5,
             "cards": [
 
                 {"image": "he-down.jpg", "color": "she", "text": "Kiss and nibble the butt"},
