@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Couple Cuddle Cards</title>
+
+        <meta name="description" content="Card spicy game for couples">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poetsen+One&display=swap" rel="stylesheet">
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                background-color: #000;
+                height: 100%;
+                font-family: "Poetsen One";
+                color: #000;
+                font-size: 16px;
+            }
+            .deck {
+                margin: 1rem;
+                margin-bottom: 2rem;
+                padding: 1rem;
+                background-color: #444;
+            }
+
+            .deck h3 {
+                color: #fff;
+            }
+
+            .cards {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .card {
+                width: 200px;
+                height: 250px;
+                margin-right: 1em;
+                background-color: #fff;
+                padding: .5rem;
+                margin-bottom: 1rem;
+            }
+            .card img {
+                max-width: 100%;
+            }
+        </style>
+
+        <script>
+
+            const qs = window.location.search.replace('?', '');
+            const items = qs.split('&');
+
+            const params = items.reduce((data, item) => {
+                const [rawKey, rawValue] = item.split('=');
+                const key = decodeURIComponent(rawKey);
+                const value = decodeURIComponent(rawValue);
+                data[key] = value;
+                return data;
+            }, {});
+
+            const config = {
+                startDeck: params['deck'] ? params['deck'] : null, // debug
+                useAllCards: location.href.indexOf('all') > 0, // debug
+                debug: location.href.indexOf('debug') > 0, // debug
+                timer: 60,
+                set: params['set'] ? params['set'] : 'base',
+                simulate: params['simulate'] ? true : false
+            }
+
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.src = "assets/" + config.set + '/set.js?ver=' + Date.now();
+            document.head.append(s);
+
+            let set = null;
+            let version = 1;
+            let cardIndex = -1;
+            let cardElement = null;
+            let textElement = null;
+            let imageElement = null;
+            let deckElement = null;
+            let buttonElement = null;
+            let endAudio = new Audio('assets/card-end.mp3?ver=' + version);
+            endAudio.load();
+            let timer = null;
+            let buttonStep = '';
+
+            let cards = [];
+
+            window.onload = async (event) => {
+                //await fetch('assets/' + config.set + '/set.json')
+                //        .then((response) => response.json())
+                //        .then((json) => {
+                //            set = json;
+                //        });
+                cardElement = document.getElementById("card");
+                textElement = document.getElementById("card-text");
+                deckElement = document.getElementById("deck");
+                levelElement = document.getElementById("card-level");
+                durationElement = document.getElementById("card-duration");
+                imageElement = document.getElementById("card-image");
+                buttonElement = document.getElementById("card-button");
+                numberElement = document.getElementById("card-number");
+
+                setElement = document.getElementById("set");
+
+                console.log(set);
+
+                if (!set.timer)
+                    set.timer = config.timer;
+
+                html = '';
+
+                for (level = 0; level < set.decks.length; level++) {
+                    let deck = set.decks[level];
+                    html += '<div class="deck">';
+                    if (deck.name) {
+                        html += '<h3>' + deck.name + '</h3>';
+                    }
+                    html += '<div class="cards">';
+
+                    for (idx = 0; idx < deck.cards.length; idx++) {
+                        deck.cards[idx].idx = idx;
+                    }
+
+                    if (config.simulate) {
+
+                        // Shuffle to extrat randomly
+                        sub = shuffle(deck.cards);
+
+                        // Keep only max cards (it wil be a random set, see above)
+                        if (deck.max) {
+                            if (deck.max < 1)
+                                deck.max = Math.floor(deck.cards.length * deck.max);
+                            sub = deck.cards.slice(0, deck.max);
+                        }
+
+
+                        // Reorder if not to be shuffled
+                        deck.shuffle = deck.shuffle === undefined || deck.shuffle;
+                        if (!deck.shuffle) {
+                            sub.sort((a, b) => a.idx - b.idx);
+                        }
+
+                    } else {
+                        sub = deck.cards;
+                    }
+
+                    sub.forEach(c => {
+                        c.deck_id = deck.id;
+                        if (!c.color) {
+                            c.color = set.colors['default'];
+                        } else if (!c.color.startsWith('#')) {
+                            c.color = set.colors[c.color];
+                        }
+                        c.duration = config.debug ? 1 : (c.duration ? c.duration : set.timer);
+                        if (c.image.indexOf('.') < 0) {
+                            if (c.image !== '-') {
+                                c.image = set.images[c.image];
+                            }
+                        }
+
+                        html += '<div class="card">';
+                        html += '<img src="' + (c.image === '-' ? '' : 'assets/' + config.set + '/' + c.image) + '">';
+                        html += c.text;
+                        html += '</div>';
+                    });
+                    html += '</div>'; // Cards
+                    html += '</div>'; // Deck
+                }
+
+                setElement.innerHTML = html;
+
+            };
+
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+
+                // While there remain elements to shuffle.
+                while (currentIndex != 0) {
+
+                    // Pick a remaining element.
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    // And swap it with the current element.
+                    [array[currentIndex], array[randomIndex]] = [
+                        array[randomIndex], array[currentIndex]];
+                }
+
+                return array;
+            }
+
+            function setCard(card) {
+                deckElement.style.backgroundColor = 'white';
+
+                //buttonElement.style.backgroundColor = levelColors[card.level - 1];
+
+                imageElement.style.visibility = 'visible';
+                textElement.style.visibility = 'visible';
+
+                textElement.innerHTML = card.text;
+
+                imageElement.src = card.image === '-' ? '' : 'assets/' + config.set + '/' + card.image;
+
+
+                numberElement.innerHTML = cardIndex + 1 + "/" + cards.length;
+            }
+
+            function startGame() {
+                document.getElementById('start').style.display = 'none';
+                deckElement.style.display = 'flex';
+                nextCard();
+            }
+
+            function buttonClick() {
+                if (buttonStep === 'skip') {
+                    nextCard();
+                    return;
+                }
+
+                if (buttonStep === 'play') {
+                    setCard(cards[cardIndex]);
+                    buttonElement.innerHTML = '⏱'; // '👩‍❤️‍👨⏱️';
+                    buttonElement.disabled = true;
+                    window.clearTimeout(timer);
+                    timer = window.setTimeout(endCard, cards[cardIndex].duration * 1000);
+                    return;
+                }
+
+                if (buttonStep === 'next') {
+                    nextCard();
+                    return;
+                }
+
+            }
+
+            function nextCard() {
+                cardIndex++;
+                if (cardIndex >= cards.length) {
+                    deckElement.style.display = 'none';
+                    document.getElementById('end').style.display = 'block';
+                    return;
+                }
+
+                imageElement.style.visibility = 'hidden';
+                textElement.style.visibility = 'hidden';
+
+                deckElement.style.backgroundColor = cards[cardIndex].color;
+                deckElement.style.borderTopColor = cards[cardIndex].color;
+                deckElement.style.borderBottomColor = cards[cardIndex].color;
+
+                buttonElement.disabled = false;
+                buttonElement.innerHTML = '⟳'; //'▶';
+                buttonStep = 'play';
+            }
+
+            function endCard() {
+                endAudio.play();
+                endAudio.onended = nextCard;
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <a href="?simulate=1">simulate</a>
+
+        <div class="set" id="set">
+
+
+
+        </div>
+
+    </body>
+</html>
