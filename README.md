@@ -30,11 +30,14 @@ starts when the card is turned and it can be used to define a minimum or a maxim
 
 ## Available sets
 
-* The "base" set, loaded by default, is the original game
+* The "base" set, loaded by default, is the original game. Demo: https://zondissima.free.nf/cards/index.html
 * The "her" set or "Cuddles for her" is a simple sequence of cuddles for her. Demo: https://zondissima.free.nf/cards/index.html?set=her
 
 ## Configuration
 A configuration object is inside the index.html and can be used to set the default card duration (to be moved as a set's property) a some other debug settings.
+
+## Debug mode
+Adding the parameter debug to the URL you can use the debug mode, which mainly shorten the timer. Example: https://zondissima.free.nf/cards/index.html?debug. To play a specific set in debug more, use https://zondissima.free.nf/cards/index.html?set=her&debug
 
 ## Help needed
 * A better organization of the code
