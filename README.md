@@ -12,12 +12,18 @@ When all the cards from a deck have been turned and played, the next deck is use
 A "set" is composed by some decks of cards, ordered, and defined in a json. See the assets/base/set.json. At set level card colors can be defined and those
 colors referenced from each single card to make it easy to change them.
 
-All assets composing a set (the json, the pictures, ...) must be contained in a folder under the "assets" folder.
+All assets composing a set (the js, the pictures, ...) must be contained in a folder under the "assets" folder.
 
 A deck is a list of cards with an id (not used right now) and with an optional "max" attribute which is the number of cards the engine should used from that deck during a game.
 
 A card is made if a picture, a text and a duration. The picture path is relative to the set's folder, but absolute URLs can be used. The duration is used by a timer that
 starts when the card is turned and it can be used to define a minimum or a maximum time, it depends on the game rules.
+
+## Available sets
+
+* The base set
+* The "Cuddles for her" set
+* The KS set: it is the base set plus an extra deck
 
 ## Configuration
 A configuration object is inside the index.html and can be used to set the default card duration (to be moved as a set's property) a some other debug settings.
