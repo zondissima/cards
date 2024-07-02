@@ -1,121 +1,51 @@
 set = {
-    "description": "",
+    "description": "Single deck, no random selection.",
     "colors": {
         "default": "darkred",
     },
+    "images": {
+        "down": "down.jpg",
+        "up": "up.jpg",
+        "sit": "she-sit.jpg",
+    },
     "name": "Cuddles for her",
-    "instructions": "Each card is a cuddle by him for at least the card timing. The card is changed when she says NEXT. She blindfolded is recommended.",
-    "timer": 45,
+    "instructions": "Listen to your body, not your mind. Each card is a cuddle until the time gets off but the card is changed only when she says NEXT. Bindfolded is recommended.",
+    "timer": 60,
     "decks": [
         {
-            "id": "deck1down",
-            "max": "3",
+            "id": "deck1",
+            "shuffle": false,
             "cards": [
-                {"image": "she-down.jpg", "color": "", "text": "Massage feet and legs"},
-                {"image": "she-down.jpg", "color": "", "text": "Massage neck and back"},
-                {"image": "she-down.jpg", "color": "", "text": "Massage the butt"},
-                {"image": "she-down.jpg", "color": "", "text": "Kiss neck and back"},
-                {"image": "she-down.jpg", "color": "", "text": "Kiss the legs"},
+                {"image": "down", "text": "Massage feet"},
+                {"image": "down", "text": "Massage legs"},
+                {"image": "down", "text": "Massage shoulders, neck and back"},
+                {"image": "down", "text": "Massage inner thighs and butt"},
+                {"image": "down", "text": "Long caresses all over body"},
+                {"image": "down", "text": "Free up the 🍒 and kiss and nibble all over body"},
+
+                {"image": "up", "text": "Passionate kiss on mouth"},
+                {"image": "up", "text": "Kiss and nibble neck and ears"},
+                {"image": "up", "text": "Massage feet and legs"},
+                {"image": "up", "text": "Caress with fingertips all over the body"},
+                {"image": "up", "text": "Massage the breasts"},
+                {"image": "up", "text": "Kiss and nibble all over body"},
+                {"image": "up", "text": "Passionate kiss on mouth"},
+
+                {"image": "down", "text": "Long caresses all over body and under the panties"},
+                {"image": "down", "text": "Remove panties. Kiss and nibble thighs, butt and lower back"},
+                {"image": "down", "text": "Facing her feet rub inner thighs, butt and there"},
+                {"image": "down", "text": "Rub 10 seconds, stop 5 seconds, repeat"},
+                {"image": "down", "text": "Caress, kiss and nibble all over body"},
+
+                {"image": "up", "text": "Passionate kiss on mouth"},
+                {"image": "up", "text": "Rub and kiss the breasts"},
+                {"image": "up", "text": "Kiss the breasts and touch there"},
+                {"image": "up", "text": "Rub 10 seconds, stop 5 seconds, repeat"},
+                {"image": "up", "text": "Put a pillow under her hips and kiss the thighs belly and there"},
+                {"image": "up", "text": "Explore with fingers bring to the limit and stop and restart"},
+                {"image": "up", "text": "Move your head between her legs and happy ending"}
             ]
-        },
-        {
-            "id": "deck1up",
-            "max": "3",
-            "cards": [
-                {"image": "she-up.jpg", "color": "", "text": "Kisses on neck and mouth"},
-                {"image": "she-up.jpg", "color": "", "text": "Massage feet and legs"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss feet and legs"},
-                {"image": "she-up.jpg", "color": "", "text": "Rub the chest"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss the chest and belly"},
-                {"image": "she-up.jpg", "color": "", "text": "Passionate kiss taking her head"},
-            ]
-        },
-        {
-            "id": "bra",
-            "cards": [
-                {"image": "she-up.jpg", "color": "", "text": "Level 2: Free up the 🍒 and caress"},
-            ]
-        },
-        {
-            "id": "deck2",
-            "max": "5",
-            "cards": [
-                {"image": "she-up.jpg", "color": "", "text": "Caress the chest"},
-                {"image": "she-up.jpg", "color": "", "text": "Caress the chest and there"},
-                {"image": "she-up.jpg", "color": "", "text": "Caress the tights and there"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss neck and mouth"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss the mouth and caress there"},
-                {"image": "she-up.jpg", "color": "", "text": "Delicate kisses on the chest"},
-                {"image": "she-up.jpg", "color": "", "text": "Delicate kisses on the belly and there"},
-                {"image": "she-up.jpg", "color": "", "text": "Kisses from feet to mouth"},
-                {"image": "she-up.jpg", "color": "", "text": "Kisses from mouth to feet"},
-
-                {"image": "she-down.jpg", "color": "", "text": "Rub thighs and butt under panties"},
-            ]
-        },
-        {
-            "id": "turn",
-            "max": 1,
-            "cards": [
-                {"image": "she-down.jpg", "color": "", "text": "Level 3: lying face down", "duration": 15},
-            ]
-        },
-        {
-            "id": "deck2b",
-            "cards": [
-                {"image": "she-down.jpg", "color": "", "text": "Kiss and nibble the butt"},
-                {"image": "she-down.jpg", "color": "", "text": "Rub the butt and kiss the neck"},
-                {"image": "she-down.jpg", "color": "", "text": "Rub the butt"},
-                {"image": "she-down.jpg", "color": "", "text": "Rub the butt under panties"},
-                {"image": "she-down.jpg", "color": "", "text": "Rub the inner thights and butt"},
-                {"image": "she-down.jpg", "color": "", "text": "Kisses from feet to neck"},
-                {"image": "she-cat.jpg", "color": "", "text": "Caress the cest"},
-                {"image": "she-cat.jpg", "color": "", "text": "Massage the butt"},
-                {"image": "she-cat.jpg", "color": "", "text": "Rub the butt and cest"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kiss the breast"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kiss and nibble the butt and there"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kisses from feet to neck"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kisses from neck to thighs"},
-            ]
-        },
-
-        {
-            "id": "underware",
-            "max": 1,
-            "cards": [
-                {"image": "she-down.jpg", "color": "", "text": "Kiss the butt and free up the 🌷"},
-                //{"image": "she-up.jpg", "color": "", "text": "Kiss there and free up the 🌷"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kiss the butt and free up the 🌷"}
-            ]
-        },
-
-        {
-            "id": "deck4",
-            "cards": [
-
-
-                {"image": "she-down-2.jpg", "color": "", "text": "Caress the butt and there"},
-                {"image": "she-down-2.jpg", "color": "", "text": "Kiss and nibble the butt"},
-                {"image": "she-down-2.jpg", "color": "", "text": "Kisses from neck to thighs"},
-                {"image": "she-down-2.jpg", "color": "", "text": "Kisses from feet to neck"},
-
-                {"image": "she-up.jpg", "color": "", "text": "Caress there"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss and suck there"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss and suck the breast"},
-                {"image": "she-up.jpg", "color": "", "text": "Kiss from mouth to there"},
-                //{"image": "she-up.jpg", "color": "", "text": "Kiss from mouth to belly"},
-
-                //{"image": "she-up.jpg", "color": "", "text": "Kiss the breast and rub there"},
-                //{"image": "she-up.jpg", "color": "", "text": "Passionate kiss and rub there"},
-
-                {"image": "she-cat.jpg", "color": "", "text": "Caress the butt and there"},
-                {"image": "she-cat.jpg", "color": "", "text": "Nibble and suck butt and there"},
-                {"image": "she-cat.jpg", "color": "", "text": "Nibble the butt and caress the breast"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kisses from neck to thighs"},
-                {"image": "she-cat.jpg", "color": "", "text": "Kisses from feet to neck"},
-
-            ]
-        },
+        }
 
     ]
 }
