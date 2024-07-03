@@ -6,7 +6,6 @@ set = {
     "images": {
         "down": "down.jpg",
         "up": "up.jpg",
-        "sit": "she-sit.jpg",
     },
     "name": "Cuddles for her",
     "instructions": "Listen to your body, not your mind. Each card is a cuddle until the time gets off but the card is changed only when she says NEXT. Bindfolded is recommended.",
