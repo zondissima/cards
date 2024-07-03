@@ -45,6 +45,9 @@
                 background-color: #fff;
                 padding: .5rem;
                 margin-bottom: 1rem;
+                border-radius: 1rem;
+                border-top: .5rem solid transparent;
+                border-bottom: .5rem;
             }
             .card img {
                 max-width: 100%;
@@ -154,6 +157,10 @@
 
                     sub.forEach(c => {
                         c.deck_id = deck.id;
+                        if (!c.color && deck.color) {
+                                c.color = deck.color;
+                        }
+
                         if (!c.color) {
                             c.color = set.colors['default'];
                         } else if (!c.color.startsWith('#')) {
@@ -166,7 +173,10 @@
                             }
                         }
 
-                        html += '<div class="card">';
+                        html += '<div class="card"';
+
+                        html += ' style="border-top-color: ' + c.color + ';"';
+                        html += '>';
                         html += '<img src="' + (c.image === '-' ? '' : 'assets/' + config.set + '/' + c.image) + '">';
                         html += c.text;
                         html += '</div>';
