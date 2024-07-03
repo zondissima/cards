@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Couple Cuddle Cards</title>
-
+        <meta property="og:image" content="assets/social-banner.jpg">
         <meta name="description" content="Card spicy game for couples">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,7 @@
             }, {});
 
             const config = {
-                startDeck: params['deck'] ? params['deck'] : null, // debug
-                useAllCards: location.href.indexOf('all') > 0, // debug
+                startDeck: params['deck'] ? params['deck'] : 0, // debug
                 debug: location.href.indexOf('debug') > 0, // debug
                 timer: 60,
                 set: params['set'] ? params['set'] : 'base'
@@ -55,11 +54,6 @@
             let cards = [];
 
             window.onload = async (event) => {
-                //await fetch('assets/' + config.set + '/set.json')
-                //        .then((response) => response.json())
-                //        .then((json) => {
-                //            set = json;
-                //        });
                 cardElement = document.getElementById("card");
                 textElement = document.getElementById("card-text");
                 deckElement = document.getElementById("deck");
@@ -72,24 +66,22 @@
                 document.getElementById("start-image").src = 'assets/' + config.set + '/start.jpg';
                 document.getElementById("end-image").src = 'assets/' + config.set + '/end.jpg';
                 console.log(set);
+
                 if (set.name) {
                     document.getElementById("start-name").innerHTML = set.name;
                 }
+
                 if (set.instructions) {
                     document.getElementById("start-text").innerHTML = set.instructions;
                 }
 
-                if (!set.timer)
+                if (!set.timer) {
                     set.timer = config.timer;
+                }
 
-                for (level = 0; level < set.decks.length; level++) {
+                // Cards preparation
+                for (level = config.startDeck; level < set.decks.length; level++) {
                     let deck = set.decks[level];
-
-                    // Skip the desk if the starting one is specified
-                    if (config.startDeck && config.startDeck !== deck.id) {
-                        continue;
-                    }
-                    config.startDeck = null;
 
                     // Add an index to reorder, if necessary
                     for (idx = 0; idx < deck.cards.length; idx++) {
@@ -114,16 +106,24 @@
                     // Prepare the cards
                     sub.forEach(c => {
                         c.deck_id = deck.id;
+                        if (!c.color && deck.color) {
+                                c.color = deck.color;
+                        }
+
                         if (!c.color) {
                             c.color = set.colors['default'];
                         } else if (!c.color.startsWith('#')) {
                             c.color = set.colors[c.color];
                         }
                         c.duration = config.debug ? 1 : (c.duration ? c.duration : set.timer);
+
+                        // If not extension, it's a reference
                         if (c.image.indexOf('.') < 0) {
                             c.image = set.images[c.image];
                         }
                     });
+
+                    // Append to the final list
                     cards = cards.concat(sub);
                 }
 
@@ -133,7 +133,7 @@
                 let currentIndex = array.length, randomIndex;
 
                 // While there remain elements to shuffle.
-                while (currentIndex != 0) {
+                while (currentIndex !== 0) {
 
                     // Pick a remaining element.
                     randomIndex = Math.floor(Math.random() * currentIndex);
